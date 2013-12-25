@@ -23,13 +23,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuestionsActivity extends Activity {
 	List<Question> questionL= new ArrayList<Question>();
 	Integer questionIndex=0;
+	public static List<Question> examQuestionL;
 	Integer startEnglish=0;
+	boolean firstRun=true;
 	Integer startFrench=0;
 	Integer startInformatics=0;
 	Integer startRussian=0;
@@ -48,44 +51,47 @@ public class QuestionsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_questions);
 		langChoosen=0;
-		final CharSequence[] languages = {"Ingilis dili","Rus dili","Fransız dili"};
-        AlertDialog.Builder langAlert = new AlertDialog.Builder(this);
-        langAlert.setTitle("Xarici dil seçin");
-        langAlert.setSingleChoiceItems(languages,-1, new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which) 
-            {
-                if(languages[which]=="Ingilis dili")
-                {
-                	langChoosen=1;
-                }
-                else if (languages[which]=="Rus dili")
-                {
-                	langChoosen=2;
-                }
-                else if (languages[which]=="Fransız dili")
-                {
-                	langChoosen=3;
-                }
-            }
-        });
-        langAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-        	public void onClick(DialogInterface dialog, int whichButton) {
-        		System.out.println("done"+langChoosen);
-        	  }
-        	});	
-        langAlert.show();
-		//CustomImageVIew mImageView = (CustomImageVIew)findViewById(R.id.imageView1);
-		//mImageView.setBitmap(your bitmap);
-		ParseQuestions test=new ParseQuestions(this.getApplicationContext());
-		questionL=test.questions("questions.xml");
-		this.displayQuestion(questionL.get(0), 0);
+		if(firstRun){
+			firstRun=false;
+			ParseQuestions pq=new ParseQuestions(context);
+			questionL=pq.questions("questions.xml");
+			AlertDialog.Builder langAlert;
+		    final CharSequence[] languages = {"Ingilis dili","Rus dili","Fransız dili"};
+		    langAlert = new AlertDialog.Builder(context);
+		    langAlert.setTitle("Xarici dil seçin");
+		    langAlert.setSingleChoiceItems(languages,-1, new DialogInterface.OnClickListener()
+		    {
+		        @Override
+		        public void onClick(DialogInterface dialog, int which) 
+		        {
+		            if(languages[which]=="Ingilis dili")
+		            {
+		            	langChoosen=1;
+		            }
+		            else if (languages[which]=="Rus dili")
+		            {
+		            	langChoosen=2;
+		            }
+		            else if (languages[which]=="Fransız dili")
+		            {
+		            	langChoosen=3;
+		            }
+		        }
+		    });
+		    langAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		    	public void onClick(DialogInterface dialog, int whichButton) {
+		    		
+		    	  }
+		    	});	
+		    langAlert.show();
 		startLogicText=ExamHelper.getStartText(0,questionL);
 		startInformatics=ExamHelper.getStartInformatics(startLogicText, questionL);
 		startEnglish=ExamHelper.getStartEnglish(startInformatics, questionL);
 		startRussian=ExamHelper.getStartRussian(startEnglish, questionL);
 		startFrench=ExamHelper.getStartFrench(startRussian, questionL);
+		}
+		this.displayQuestion(questionL.get(0), 0);	
+		
 		addListenerOnButtonPrev();
 		addListenerOnButtonNext();
 		addListenerOnButtonA();
@@ -190,11 +196,10 @@ public class QuestionsActivity extends Activity {
 	        	exitAlert.show();
 	        	return true;
 	        case R.id.exam:
-	        	List<Question> examQuestionL= new ArrayList<Question>();
+	        	examQuestionL= new ArrayList<Question>();
 	        	
+	    		System.out.println("testing:"+langChoosen);
 	            
-	            Intent intent = new Intent(this, ExamActivity.class);
-	            startActivity(intent);
 	            System.out.println("startInformatics: "+startInformatics);
 	            System.out.println("startLogicText:"+startLogicText);
 	            System.out.println("startEnglish: "+startEnglish);
@@ -212,6 +217,8 @@ public class QuestionsActivity extends Activity {
 	            else if(langChoosen==3)
 	            ExamHelper.addQuestions(questionL, examQuestionL, startFrench, questionL.size(),25); //french
 	            System.out.println("size"+examQuestionL.size());
+	            Intent intent = new Intent(this, ExamActivity.class);
+	            startActivity(intent);
 	        	
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -219,13 +226,17 @@ public class QuestionsActivity extends Activity {
 	}
 	
 	public void displayQuestion(Question question, Integer index){
-		/*ImageDecoder imageDecoder =new ImageDecoder();
 		if(question.getImage()!=null){
-			System.out.println("here:");
-			Bitmap myBitmap = imageDecoder.ConvertToImage(question.getImage());
-			ImageView cimg = (ImageView)findViewById(R.id.imageView1);
-			cimg.setImageBitmap(myBitmap);
-		}*/
+			String imageName="image"+question.getImage();
+			ImageView img= (ImageView) findViewById(R.id.imageView1);
+			int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
+			System.out.println("from id: "+id);
+			img.setImageResource(id);
+		}
+		else{
+			ImageView img= (ImageView) findViewById(R.id.imageView1);
+			img.setImageResource(R.drawable.kainat);
+		}
 
 		TextView t=new TextView(this);
 		t=(TextView)findViewById(R.id.textView2);

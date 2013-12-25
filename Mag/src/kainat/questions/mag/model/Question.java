@@ -4,11 +4,13 @@ package kainat.questions.mag.model;
 
 import java.io.Serializable;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 /**
  * @author ulvi
  *
  */
-public class Question implements Serializable{
+public class Question implements Parcelable, Serializable{
 	
 	private String questionText;
 	private String choiceA;
@@ -19,6 +21,11 @@ public class Question implements Serializable{
 	private String correctAnswer;
 	private String questionType;
 	private String image;
+	private Integer colorA;
+	private Integer colorB;
+	private Integer colorC;
+	private Integer colorD;
+	private Integer colorE;
 	
 	public Question(){
 		this.questionText=null;
@@ -60,7 +67,37 @@ public class Question implements Serializable{
 	public void setImage(String image){
 		this.image=image;
 	}
-	
+	public void setColorA(Integer colorA){
+		this.colorA=colorA;
+	}
+	public void setColorB(Integer colorB){
+		this.colorB=colorB;
+	}
+	public void setColorC(Integer colorC){
+		this.colorC=colorC;
+	}
+	public void setColorD(Integer colorD){
+		this.colorD=colorD;
+	}
+	public void setColorE(Integer colorE){
+		this.colorE=colorE;
+	}
+
+	public Integer getColorA(){
+		return this.colorA;
+	}
+	public Integer getColorB(){
+		return this.colorB;
+	}
+	public Integer getColorC(){
+		return this.colorC;
+	}
+	public Integer getColorD(){
+		return this.colorD;
+	}
+	public Integer getColorE(){
+		return this.colorE;
+	}
 	public String getQuestionText(){
 		return this.questionText;
 	}
@@ -88,5 +125,17 @@ public class Question implements Serializable{
 	}
 	public String getImage(){
 		return this.image;
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/itemlogic"
+          android:title="Məntiq" />
+    <item android:id="@+id/iteminformatics"
+          android:title="Informatika" />
+    <item android:id="@+id/itemlang"
+          android:title="Xarici dil" />
+    <item android:id="@+id/choosequestion"
+          android:title="Sual seç" />
+    <item android:id="@+id/result"
+          android:title="Nəticə" />
+    <item android:id="@+id/exit"
+          android:title="Çıxış" />
+	</menu>

@@ -32,7 +32,7 @@ public class QuestionsActivity extends Activity {
 	Integer questionIndex=0;
 	public static List<Question> examQuestionL;
 	Integer startEnglish=0;
-	boolean firstRun=true;
+	public static boolean firstRun=true;
 	Integer startFrench=0;
 	Integer startInformatics=0;
 	Integer startRussian=0;

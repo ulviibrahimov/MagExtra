@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import kainat.questions.mag.model.Question;
+import android.os.CountDownTimer;
+import android.widget.TextView;
 
 public class ExamHelper {
 	public static int randInt(int min, int max) {
@@ -90,6 +92,29 @@ public class ExamHelper {
         	}
         }
 		return start;
+	}
+	
+	public static void newTimer(final TextView tv){
+		new CountDownTimer(9000000, 10000) {
+			 
+		     public void onTick(long millisUntilFinished) {
+		    	 long minutes= millisUntilFinished / 60000;
+		    	 int showHours=(int) (minutes/60);
+		    	 int showMinutes= (int) (minutes-60*showHours+1);
+		    	 if(showHours>0){
+		    		 
+		    		 tv.setText("Qalan vaxt:  " + showHours+"saat "+showMinutes+"dəqiqə\n");
+		    	 }
+		    	 else{
+		    		 tv.setText("Qalan vaxt: "+showMinutes+"dəqiqə\n");
+		    	 }
+		     }
+
+		     public void onFinish() {
+		         tv.setText("done!");
+		     }
+		  }.start();
+		
 	}
 	
 }

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp" >
-    	
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/nextbutton"
@@ -14,36 +12,34 @@
         android:layout_alignParentTop="true"
         android:text="@string/next" />
 
+    <Button
+        android:id="@+id/prevbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/prev" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/prevbutton"
         android:layout_alignParentTop="true"
-        android:gravity="center"
         android:layout_toLeftOf="@+id/nextbutton"
         android:layout_toRightOf="@+id/prevbutton"
-        android:ems="10" />
-
-    
-
-    <Button
-        android:id="@+id/bbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/cbutton"
-        android:layout_alignLeft="@+id/abutton"
-        android:layout_alignRight="@+id/abutton"
-        android:textSize="10sp" />
+        android:ems="10"
+        android:gravity="center"/>
 
     <Button
-        android:id="@+id/cbutton"
+        android:id="@+id/ebutton"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/dbutton"
-        android:layout_alignLeft="@+id/bbutton"
-        android:layout_alignRight="@+id/bbutton"
-        android:textSize="10sp" />
+        android:layout_alignLeft="@+id/dbutton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/dbutton"
@@ -52,7 +48,29 @@
         android:layout_above="@+id/ebutton"
         android:layout_alignLeft="@+id/cbutton"
         android:layout_alignRight="@+id/cbutton"
-        android:textSize="10sp" />
+        android:textSize="12sp"
+        style="?android:attr/buttonStyleSmall"/>
+
+    <Button
+        android:id="@+id/cbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dbutton"
+        android:layout_alignLeft="@+id/bbutton"
+        android:layout_alignRight="@+id/bbutton"
+        android:textSize="12sp" 
+        style="?android:attr/buttonStyleSmall"/>
+
+    <Button
+        android:id="@+id/bbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cbutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/abutton"
+        android:textSize="12sp" 
+        style="?android:attr/buttonStyleSmall"
+        />
 
     <Button
         android:id="@+id/abutton"
@@ -61,31 +79,13 @@
         android:layout_above="@+id/bbutton"
         android:layout_alignLeft="@+id/imageView1"
         android:layout_alignRight="@+id/imageView1"
-        android:textSize="10sp" />
-
-    <Button
-        android:id="@+id/ebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dbutton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/dbutton"
-        android:textSize="10sp" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/abutton"
-        android:layout_alignLeft="@+id/abutton"
-        android:layout_gravity="center"
-        android:text="This is the body "
-        android:textSize="10sp"/>
+        android:textSize="12sp"
+        style="?android:attr/buttonStyleSmall" />
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/textView1"
         android:layout_alignLeft="@+id/prevbutton"
         android:layout_alignRight="@+id/nextbutton"
@@ -94,14 +94,14 @@
         android:src="@drawable/kainat"
         android:scaleType="fitXY" />
 
-    <Button
-        android:id="@+id/prevbutton"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/abutton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/prev" />
-    
-   
+        android:layout_alignParentRight="true"
+        android:text="This is the body "
+        android:textSize="12sp" />
 
 </RelativeLayout>

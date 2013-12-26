@@ -28,17 +28,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuestionsActivity extends Activity {
-	List<Question> questionL= new ArrayList<Question>();
-	Integer questionIndex=0;
+	public static List<Question> questionL= new ArrayList<Question>();
+	public static Integer questionIndex=0;
 	public static List<Question> examQuestionL;
-	Integer startEnglish=0;
+	public static Integer startEnglish=0;
 	public static boolean firstRun=true;
-	Integer startFrench=0;
-	Integer startInformatics=0;
-	Integer startRussian=0;
-	Integer startLogicText=0;
-	Integer startLogicImage=0;
-	Integer langChoosen=0;
+	public static Integer startFrench=0;
+	public static Integer startInformatics=0;
+	public static Integer startRussian=0;
+	public static Integer startLogicText=0;
+	public static Integer startLogicImage=0;
+	public static Integer langChoosen=0;
 	Context context=this;
 	Button aButton;
 	Button bButton;
@@ -100,7 +100,26 @@ public class QuestionsActivity extends Activity {
 		addListenerOnButtonD();
 		addListenerOnButtonE();
 	}
+	@Override
+	public void onBackPressed() {
+		AlertDialog.Builder exitAlert = new AlertDialog.Builder(this);
 
+    	exitAlert.setTitle("Çıxış");
+    	exitAlert.setMessage("Çıxmaq istədiyinizdən əminsinizmi?");
+    	exitAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    	public void onClick(DialogInterface dialog, int whichButton) {
+    		System.exit(1);
+    	  }
+    	});
+
+    	exitAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    	  public void onClick(DialogInterface dialog, int whichButton) {
+    	    // Canceled.
+    	  }
+    	});
+
+    	exitAlert.show();
+	}
 	@Override	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds itegulpembems to the action bar if it is present.

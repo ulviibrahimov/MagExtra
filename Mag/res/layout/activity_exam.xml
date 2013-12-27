@@ -4,114 +4,110 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/nextbutton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/next" />
-
+        android:orientation="horizontal" >
+     
     <Button
-        android:id="@+id/prevbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/prev" />
+            android:id="@+id/prevbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/prev" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/questionView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/nextbutton"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/nextbutton"
-        android:layout_toRightOf="@+id/prevbutton"
-        android:ems="10"
-        android:gravity="center"
-        android:maxWidth="5dp" />
+        android:layout_weight="0.99"
+        android:gravity="center" />
 
-    <Button
-        android:id="@+id/ebutton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+    <TextView 
+        	android:id="@+id/timerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <Button
+            android:id="@+id/nextbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/next" />
+
+    </LinearLayout>
+    
+         <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dbutton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:textSize="12sp" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/dbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ebutton"
-        android:layout_alignLeft="@+id/cbutton"
-        android:layout_alignRight="@+id/cbutton"
-        android:textSize="12sp"
-        style="?android:attr/buttonStyleSmall"/>
+        <Button
+            android:id="@+id/abutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="A" />
 
-    <Button
-        android:id="@+id/cbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/dbutton"
-        android:layout_alignLeft="@+id/bbutton"
-        android:layout_alignRight="@+id/bbutton"
-        android:textSize="12sp" 
-        style="?android:attr/buttonStyleSmall"/>
+        <Button
+            android:id="@+id/bbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="B" />
 
-    <Button
-        android:id="@+id/bbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/cbutton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/abutton"
-        android:textSize="12sp" 
-        style="?android:attr/buttonStyleSmall"
-        />
+        <Button
+            android:id="@+id/cbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="C" />
 
-    <Button
-        android:id="@+id/abutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bbutton"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_alignRight="@+id/imageView1"
-        android:textSize="12sp"
-        style="?android:attr/buttonStyleSmall" />
+        <Button
+            android:id="@+id/dbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="D" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
-        android:layout_alignLeft="@+id/prevbutton"
-        android:layout_alignRight="@+id/nextbutton"
-        android:layout_below="@+id/textView3"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/kainat" />
+        <Button
+            android:id="@+id/ebutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="E" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/abutton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="This is the body "
-        android:textSize="12sp" />
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/ll1"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/nextbutton"
-        android:text="TextView" />
+     <ImageView
+         android:id="@+id/imageView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/textView1"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/ll2"
+         android:scaleType="fitXY"
+         android:src="@drawable/kainat" />
 
 </RelativeLayout>

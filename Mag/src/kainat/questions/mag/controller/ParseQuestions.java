@@ -35,6 +35,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class ParseQuestions extends DefaultHandler{
 	Question question;
+	StringBuilder sb;
 	String questionType=null;
 	List<Question> questionList= new ArrayList<Question>();
 	boolean newQuestionFlag=true;
@@ -56,11 +57,6 @@ public class ParseQuestions extends DefaultHandler{
 		   DefaultHandler defaultHandler = new DefaultHandler(){  
 		      
 		    String questionTextTag="close";  
-		    String choiceATag="close";  
-		    String choiceBTag="close";  
-		    String choiceCTag="close";
-		    String choiceDTag="close";
-		    String choiceETag="close";
 		    String correctAnswerTag="close";
 		    String imageTag="close";  
 		    String russianTag="close";
@@ -92,26 +88,13 @@ public class ParseQuestions extends DefaultHandler{
 		     if (qName.equalsIgnoreCase("Informatics")) {  
 			      informaticsTag = "open";  
 			     }  
-		     if (qName.equalsIgnoreCase("choiceA")) {  
-			      choiceATag = "open";  
-			     }  
-		     if (qName.equalsIgnoreCase("choiceB")) {  
-			      choiceBTag = "open";  
-			     } 
-		     if (qName.equalsIgnoreCase("choiceC")) {  
-			      choiceCTag = "open";  
-			     } 
-		     if (qName.equalsIgnoreCase("choiceD")) {  
-			      choiceDTag = "open";  
-			     } 
-		     if (qName.equalsIgnoreCase("choiceE")) {  
-			      choiceETag = "open";  
-			     } 
+		     
 		     if (qName.equalsIgnoreCase("correctAnswer")) {  
 			      correctAnswerTag = "open";  
 			     } 
 		     if (qName.equalsIgnoreCase("question")) {  
-			      questionTag = "open";  
+			      questionTag = "open"; 
+			      sb=new StringBuilder();
 			     } 
 		     if (qName.equalsIgnoreCase("image")) {  
 			      imageTag = "open";  
@@ -148,29 +131,20 @@ public class ParseQuestions extends DefaultHandler{
 		     }
 		     
 		     if (questionTextTag.equals("open")) {   
-		    	  question.setQuestionText(new String(ch, start, length)); 
+		    	 if (sb!=null) {
+		    	        for (int i=start; i<start+length; i++) {
+		    	            sb.append(ch[i]);
+		    	        }
+		    	    }
+		    	  //question.setQuestionText(new String(ch, start, length).trim()); 
 		    	  //System.out.println("text: "+question.getQuestionText());
 		     }
-		     if (choiceATag.equals("open")) {  
-		    	  question.setChoiceA(new String(ch, start, length)); 
-		     }
-		     if (choiceBTag.equals("open")) {  
-		    	  question.setChoiceB(new String(ch, start, length)); 
-		     }
-		     if (choiceCTag.equals("open")) {  
-		    	  question.setChoiceC(new String(ch, start, length)); 
-		     }
-		     if (choiceDTag.equals("open")) {  
-		    	  question.setChoiceD(new String(ch, start, length)); 
-		     }
-		     if (choiceETag.equals("open")) {  
-		    	  question.setChoiceE(new String(ch, start, length)); 
-		     }
+		    
 		     if (correctAnswerTag.equals("open")) {  
-		    	  question.setCorrectAnswer(new String(ch, start, length)); 
+		    	  question.setCorrectAnswer(new String(ch, start, length).trim()); 
 		     }
 		     if (imageTag.equals("open")) {  
-		    	  question.setImage(new String(ch, start, length)); 
+		    	  question.setImage(new String(ch, start, length).trim()); 
 		     }
 		    }  
 		  
@@ -197,21 +171,7 @@ public class ParseQuestions extends DefaultHandler{
 				     if (qName.equalsIgnoreCase("informatics")) {  
 					      informaticsTag = "close";  
 					     } 
-				     if (qName.equalsIgnoreCase("choiceA")) {  
-					      choiceATag = "close";  
-					     }  
-				     if (qName.equalsIgnoreCase("choiceB")) {  
-					      choiceBTag = "close";  
-					     } 
-				     if (qName.equalsIgnoreCase("choiceC")) {  
-					      choiceCTag = "close";  
-					     } 
-				     if (qName.equalsIgnoreCase("choiceD")) {  
-					      choiceDTag = "close";  
-					     } 
-				     if (qName.equalsIgnoreCase("choiceE")) {  
-					      choiceETag = "close";  
-					     } 
+				     
 				     if (qName.equalsIgnoreCase("image")) {  
 					      imageTag = "close";  
 					     } 
@@ -219,6 +179,7 @@ public class ParseQuestions extends DefaultHandler{
 					      correctAnswerTag = "close";  
 					     } 
 				     if (qName.equalsIgnoreCase("question")) {  
+				    	  question.setQuestionText(sb.toString().trim());
 					      questionTag = "close";  
 					      newQuestionFlag=true;
 					      //System.out.println(question.toString());

@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ExamActivity extends Activity {
-	String[] userAnswers=new String[100];
+	List<String> userAnswers=new ArrayList<String>();
 	List<Question> examQuestionList= new ArrayList<Question>();
 	Integer examQuestionIndex=0;
 	Integer startEnglish=0;
@@ -53,7 +53,7 @@ public class ExamActivity extends Activity {
 
 		examQuestionList=QuestionsActivity.examQuestionL;
 		timer=new TextView(this);
-		timer=(TextView)findViewById(R.id.textView3);
+		timer=(TextView)findViewById(R.id.timerView);
 		new CountDownTimer(9000000, 10000) {
 			 
 		     public void onTick(long millisUntilFinished) {
@@ -62,10 +62,10 @@ public class ExamActivity extends Activity {
 		    	 int showMinutes= (int) (minutes-60*showHours+1);
 		    	 if(showHours>0){
 		    		 
-		    		 timer.setText("Qalan vaxt:  " + showHours+" saat  "+showMinutes+" dəqiqə\n");
+		    		 timer.setText("Vaxt: " + showHours+"s "+showMinutes+"d");
 		    	 }
 		    	 else{
-		    		 timer.setText("Qalan vaxt:  " + showHours+" saat  "+showMinutes+" dəqiqə\n");
+		    		 timer.setText("Vaxt: " +showMinutes+" d");
 		    	 }
 		     }
 
@@ -75,7 +75,7 @@ public class ExamActivity extends Activity {
 		  }.start();
 		System.out.println("examsize:"+examQuestionList.size());
 		for(int p=0;p<examQuestionList.size();p++){
-			userAnswers[p]="n";
+			userAnswers.add(null);
 			examQuestionList.get(p).setColorA(lightGray);
 			examQuestionList.get(p).setColorB(lightGray);
 			examQuestionList.get(p).setColorC(lightGray);
@@ -236,32 +236,26 @@ public class ExamActivity extends Activity {
 		t=new TextView(this);
 		
 		
-		t=(TextView)findViewById(R.id.textView2);
+		t=(TextView)findViewById(R.id.questionView);
 		t.setText("Sual: "+(index+1));
 
 		TextView x=new TextView(this);
 		x=(TextView)findViewById(R.id.textView1);
 		x.setText(question.getQuestionText());
 		Button aButton=(Button)findViewById(R.id.abutton);
-        aButton.setText(question.getChoiceA());
-        aButton.setTextSize(10);
         aButton.getBackground().setColorFilter(question.getColorA(),PorterDuff.Mode.MULTIPLY);
         //aButton.setBackgroundColor(question.getColorA());
         
         Button bButton=(Button)findViewById(R.id.bbutton);
-        bButton.setText(question.getChoiceB());
         bButton.getBackground().setColorFilter(question.getColorB(),PorterDuff.Mode.MULTIPLY);
         
         Button cButton=(Button)findViewById(R.id.cbutton);
-        cButton.setText(question.getChoiceC());
         cButton.getBackground().setColorFilter(question.getColorC(),PorterDuff.Mode.MULTIPLY);
         
         Button dButton=(Button)findViewById(R.id.dbutton);
-        dButton.setText(question.getChoiceD());
         dButton.getBackground().setColorFilter(question.getColorD(),PorterDuff.Mode.MULTIPLY);
         
         Button eButton=(Button)findViewById(R.id.ebutton);
-        eButton.setText(question.getChoiceE());
         eButton.getBackground().setColorFilter(question.getColorE(),PorterDuff.Mode.MULTIPLY);
 	}
 	
@@ -315,7 +309,7 @@ public class ExamActivity extends Activity {
  
 			@Override
 			public void onClick(View arg0) {
-				userAnswers[examQuestionIndex]="a";
+				userAnswers.set(examQuestionIndex, "a");
 				eButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
 				aButton.getBackground().setColorFilter(blue,PorterDuff.Mode.MULTIPLY);
 				bButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
@@ -339,7 +333,7 @@ public class ExamActivity extends Activity {
  
 			@Override
 			public void onClick(View arg0) {
-				userAnswers[examQuestionIndex]="b";
+				userAnswers.set(examQuestionIndex, "b");
 				eButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
 				aButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
 				bButton.getBackground().setColorFilter(blue,PorterDuff.Mode.MULTIPLY);
@@ -364,7 +358,7 @@ public class ExamActivity extends Activity {
  
 			@Override
 			public void onClick(View arg0) {
-				userAnswers[examQuestionIndex]="c";
+				userAnswers.set(examQuestionIndex, "c");
 				cButton.getBackground().setColorFilter(blue,PorterDuff.Mode.MULTIPLY);
 				eButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
 				aButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
@@ -389,7 +383,7 @@ public class ExamActivity extends Activity {
  
 			@Override
 			public void onClick(View arg0) {
-				userAnswers[examQuestionIndex]="d";
+				userAnswers.set(examQuestionIndex, "d");
 				dButton.getBackground().setColorFilter(blue,PorterDuff.Mode.MULTIPLY);
 				eButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
 				aButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
@@ -415,7 +409,7 @@ public class ExamActivity extends Activity {
  
 			@Override
 			public void onClick(View arg0) {
-				userAnswers[examQuestionIndex]="e";
+				userAnswers.set(examQuestionIndex, "e");
 				eButton.getBackground().setColorFilter(blue,PorterDuff.Mode.MULTIPLY);
 				aButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
 				bButton.getBackground().setColorFilter(lightGray,PorterDuff.Mode.MULTIPLY);
@@ -440,30 +434,29 @@ public class ExamActivity extends Activity {
         Integer informaticsNotAnswered=0;
         Integer langNotAnswered=0;
         	for(int f=0;f<startInformatics;f++){
-        		if(userAnswers[f]==examQuestionList.get(f).getCorrectAnswer()){
-        			logicCorrect++;
-        		}
-        		
-        		if(userAnswers[f]=="n"){
+        		if(userAnswers.get(f)==null){
         			logicNotAnswered++;
         		}
-        	}
-        	for(int f=startInformatics;f<startLang;f++){
-        		if(userAnswers[f]==examQuestionList.get(f).getCorrectAnswer()){
-        			informaticsCorrect++;
+        		else if(userAnswers.get(f).equals(examQuestionList.get(f).getCorrectAnswer())){
+        			logicCorrect++;
+        			System.out.println("here");
         		}
         		
-        		if(userAnswers[f]=="n"){
+        	}
+        	for(int f=startInformatics;f<startLang;f++){
+        		if(userAnswers.get(f)==null){
         			informaticsNotAnswered++;
+        		}
+        		else if(userAnswers.get(f).equals(examQuestionList.get(f).getCorrectAnswer())){
+        			informaticsCorrect++;
         		}
         	}
         	for(int f=startLang;f<examQuestionList.size();f++){
-        		if(userAnswers[f]==examQuestionList.get(f).getCorrectAnswer()){
-        			langCorrect++;
-        		}
-        		
-        		if(userAnswers[f]=="n"){
+        		if(userAnswers.get(f)==null){
         			langNotAnswered++;
+        		}
+        		else if(userAnswers.get(f).equals(examQuestionList.get(f).getCorrectAnswer())){
+        			langCorrect++;
         		}
         	}
         	
@@ -473,7 +466,7 @@ public class ExamActivity extends Activity {
         	resultAlert.setMessage("Məntiq:  Düzgün: "+ logicCorrect+", səhv: "+(50-logicNotAnswered-logicCorrect)+"\n\n"+
         							"Informatika:  Düzgün: "+ informaticsCorrect+", səhv: "+(25-informaticsNotAnswered-informaticsCorrect)+"\n\n"+
         							"Xarici dil:  Düzgün: "+ langCorrect+", səhv: "+(25-langNotAnswered-langCorrect+"\n\n"+
-        							"Toplam:  "+(langCorrect+logicCorrect+informaticsCorrect)));
+        							"Toplam:  "+(langCorrect+logicCorrect+informaticsCorrect)+" bal"));
         	resultAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int whichButton) {
         		ExamActivity.this.finish();

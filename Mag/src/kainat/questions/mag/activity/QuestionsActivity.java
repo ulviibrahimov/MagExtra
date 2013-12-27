@@ -6,6 +6,7 @@ import java.util.Random;
 
 import kainat.questions.mag.R;
 import kainat.questions.mag.Helper.ExamHelper;
+import kainat.questions.mag.Helper.TouchImageView;
 import kainat.questions.mag.controller.ParseQuestions;
 import kainat.questions.mag.model.Question;
 import android.app.Activity;
@@ -38,7 +39,7 @@ public class QuestionsActivity extends Activity {
 	public static Integer startRussian=0;
 	public static Integer startLogicText=0;
 	public static Integer startLogicImage=0;
-	public static Integer langChoosen=0;
+	public static Integer langChoosen;
 	Context context=this;
 	Button aButton;
 	Button bButton;
@@ -54,7 +55,7 @@ public class QuestionsActivity extends Activity {
 		if(firstRun){
 			firstRun=false;
 			ParseQuestions pq=new ParseQuestions(context);
-			questionL=pq.questions("questions.xml");
+			questionL=pq.questions("testquestions.xml");
 			AlertDialog.Builder langAlert;
 		    final CharSequence[] languages = {"Ingilis dili","Rus dili","Fransız dili"};
 		    langAlert = new AlertDialog.Builder(context);
@@ -216,15 +217,6 @@ public class QuestionsActivity extends Activity {
 	        	return true;
 	        case R.id.exam:
 	        	examQuestionL= new ArrayList<Question>();
-	        	
-	    		System.out.println("testing:"+langChoosen);
-	            
-	            System.out.println("startInformatics: "+startInformatics);
-	            System.out.println("startLogicText:"+startLogicText);
-	            System.out.println("startEnglish: "+startEnglish);
-	            System.out.println("startRussian: "+startRussian);
-	            System.out.println("startFrench: "+startFrench);
-	           // System.out.println("startInformatics:"+startInformatics);
 
 	            ExamHelper.addQuestions(questionL, examQuestionL, 0, startLogicText, 15);			//image questions
 	            ExamHelper.addQuestions(questionL, examQuestionL, startLogicText, startInformatics, 35); //text logic
@@ -253,30 +245,19 @@ public class QuestionsActivity extends Activity {
 			img.setImageResource(id);
 		}
 		else{
-			ImageView img= (ImageView) findViewById(R.id.imageView1);
-			img.setImageResource(R.drawable.kainat);
+			//ImageView img= (ImageView) findViewById(R.id.imageView1);
+			//img.setImageResource(R.drawable.kainat);
+			TouchImageView timg = (TouchImageView) findViewById(R.id.imageView1);
+	       // timg.setMaxZoom(4);
+
 		}
 
 		TextView t=new TextView(this);
-		t=(TextView)findViewById(R.id.textView2);
+		t=(TextView)findViewById(R.id.questionView);
 		t.setText("Sual: "+(index+1));
-		t=(TextView)findViewById(R.id.textView1);
+		t=(TextView)findViewById(R.id.questionText);
 		t.setText(question.getQuestionText());
-		Button aButton=(Button)findViewById(R.id.abutton);
-        aButton.setText(question.getChoiceA());
-        aButton.setTextSize(10);
-        
-        Button bButton=(Button)findViewById(R.id.bbutton);
-        bButton.setText(question.getChoiceB());
-        
-        Button cButton=(Button)findViewById(R.id.cbutton);
-        cButton.setText(question.getChoiceC());
-        
-        Button dButton=(Button)findViewById(R.id.dbutton);
-        dButton.setText(question.getChoiceD());
-        
-        Button eButton=(Button)findViewById(R.id.ebutton);
-        eButton.setText(question.getChoiceE());
+
 	}
 
 	public void addListenerOnButtonPrev() {

@@ -26,6 +26,10 @@
             android:name="kainat.questions.mag.activity.ExamActivity"
             android:label="@string/title_activity_exam" >
         </activity>
+        <activity
+            android:name="kainat.questions.mag.activity.ImageActivity"
+            android:label="@string/title_activity_image" >
+        </activity>
     </application>
 
 </manifest>

@@ -8,5 +8,6 @@
     <string name="prev">&lt;&lt;&lt;&lt;</string>
     <string name="next">&gt;&gt;&gt;&gt;</string>
     <string name="title_activity_exam">ExamActivity</string>
+    <string name="title_activity_image">ImageActivity</string>
 
 </resources>

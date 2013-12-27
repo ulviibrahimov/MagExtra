@@ -6,7 +6,6 @@ import java.util.Random;
 
 import kainat.questions.mag.R;
 import kainat.questions.mag.Helper.ExamHelper;
-import kainat.questions.mag.Helper.TouchImageView;
 import kainat.questions.mag.controller.ParseQuestions;
 import kainat.questions.mag.model.Question;
 import android.app.Activity;
@@ -240,15 +239,23 @@ public class QuestionsActivity extends Activity {
 		if(question.getImage()!=null){
 			String imageName="image"+question.getImage();
 			ImageView img= (ImageView) findViewById(R.id.imageView1);
-			int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
+			final int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
 			System.out.println("from id: "+id);
 			img.setImageResource(id);
+			img.setOnClickListener(new View.OnClickListener(){
+			    public void onClick(View v) {
+			        Intent imageIntent = new Intent(QuestionsActivity.this,ImageActivity.class);
+			        imageIntent.putExtra("imageId", id);
+			        startActivity(imageIntent);
+			    }
+			});
 		}
 		else{
-			//ImageView img= (ImageView) findViewById(R.id.imageView1);
-			//img.setImageResource(R.drawable.kainat);
-			TouchImageView timg = (TouchImageView) findViewById(R.id.imageView1);
-	       // timg.setMaxZoom(4);
+			ImageView img= (ImageView) findViewById(R.id.imageView1);
+			img.setImageResource(R.drawable.kainat);
+
+			//TouchImageView timg = (TouchImageView) findViewById(R.id.imageView1);
+	        //timg.setMaxZoom(4);
 
 		}
 

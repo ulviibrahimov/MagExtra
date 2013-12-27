@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -225,9 +226,16 @@ public class ExamActivity extends Activity {
 		if(question.getImage()!=null){
 			String imageName="image"+question.getImage();
 			ImageView img= (ImageView) findViewById(R.id.imageView1);
-			int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
+			final int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
 			System.out.println("from id: "+id);
 			img.setImageResource(id);
+			img.setOnClickListener(new View.OnClickListener(){
+			    public void onClick(View v) {
+			        Intent imageIntent = new Intent(ExamActivity.this,ImageActivity.class);
+			        imageIntent.putExtra("imageId", id);
+			        startActivity(imageIntent);
+			    }
+			});
 		}
 		else{
 			ImageView img= (ImageView) findViewById(R.id.imageView1);

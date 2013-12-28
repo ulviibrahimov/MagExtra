@@ -102,7 +102,6 @@
          android:layout_alignParentRight="true"
          android:layout_below="@+id/ll2"
          android:scaleType="fitXY"
-         android:clickable="true"
          android:src="@drawable/kainat" />
 
 </RelativeLayout>

@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,7 +30,7 @@ import android.widget.Toast;
 
 public class QuestionsActivity extends Activity {
 	public static List<Question> questionL= new ArrayList<Question>();
-	public static Integer questionIndex=0;
+	public static Integer questionIndex;
 	public static List<Question> examQuestionL;
 	public static Integer startEnglish=0;
 	public static boolean firstRun=true;
@@ -50,47 +51,19 @@ public class QuestionsActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_questions);
-		langChoosen=0;
 		if(firstRun){
 			firstRun=false;
+			questionIndex=0;
 			ParseQuestions pq=new ParseQuestions(context);
 			questionL=pq.questions("testquestions.xml");
-			AlertDialog.Builder langAlert;
-		    final CharSequence[] languages = {"Ingilis dili","Rus dili","Fransız dili"};
-		    langAlert = new AlertDialog.Builder(context);
-		    langAlert.setTitle("Xarici dil seçin");
-		    langAlert.setSingleChoiceItems(languages,-1, new DialogInterface.OnClickListener()
-		    {
-		        @Override
-		        public void onClick(DialogInterface dialog, int which) 
-		        {
-		            if(languages[which]=="Ingilis dili")
-		            {
-		            	langChoosen=1;
-		            }
-		            else if (languages[which]=="Rus dili")
-		            {
-		            	langChoosen=2;
-		            }
-		            else if (languages[which]=="Fransız dili")
-		            {
-		            	langChoosen=3;
-		            }
-		        }
-		    });
-		    langAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		    	public void onClick(DialogInterface dialog, int whichButton) {
-		    		
-		    	  }
-		    	});	
-		    langAlert.show();
+			
 		startLogicText=ExamHelper.getStartText(0,questionL);
 		startInformatics=ExamHelper.getStartInformatics(startLogicText, questionL);
 		startEnglish=ExamHelper.getStartEnglish(startInformatics, questionL);
 		startRussian=ExamHelper.getStartRussian(startEnglish, questionL);
 		startFrench=ExamHelper.getStartFrench(startRussian, questionL);
 		}
-		this.displayQuestion(questionL.get(0), 0);	
+		
 		
 		addListenerOnButtonPrev();
 		addListenerOnButtonNext();
@@ -99,6 +72,11 @@ public class QuestionsActivity extends Activity {
 		addListenerOnButtonC();
 		addListenerOnButtonD();
 		addListenerOnButtonE();
+	}
+	@Override
+	public void onResume(){
+		super.onResume();
+		this.displayQuestion(questionL.get(questionIndex), questionIndex);	
 	}
 	@Override
 	public void onBackPressed() {
@@ -111,8 +89,7 @@ public class QuestionsActivity extends Activity {
     		System.exit(1);
     	  }
     	});
-
-    	exitAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        	exitAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     	  public void onClick(DialogInterface dialog, int whichButton) {
     	    // Canceled.
     	  }
@@ -215,18 +192,7 @@ public class QuestionsActivity extends Activity {
 	        	exitAlert.show();
 	        	return true;
 	        case R.id.exam:
-	        	examQuestionL= new ArrayList<Question>();
-
-	            ExamHelper.addQuestions(questionL, examQuestionL, 0, startLogicText, 15);			//image questions
-	            ExamHelper.addQuestions(questionL, examQuestionL, startLogicText, startInformatics, 35); //text logic
-	            ExamHelper.addQuestions(questionL, examQuestionL, startInformatics, startEnglish,25);//informatics
-	            if(langChoosen==1)
-	            ExamHelper.addQuestions(questionL, examQuestionL, startEnglish, startRussian,25);    //english
-	            else if(langChoosen==2)
-	            ExamHelper.addQuestions(questionL, examQuestionL, startRussian, startFrench,25);	  //russian
-	            else if(langChoosen==3)
-	            ExamHelper.addQuestions(questionL, examQuestionL, startFrench, questionL.size(),25); //french
-	            System.out.println("size"+examQuestionL.size());
+	        	
 	            Intent intent = new Intent(this, ExamActivity.class);
 	            startActivity(intent);
 	        	
@@ -242,6 +208,7 @@ public class QuestionsActivity extends Activity {
 			final int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
 			System.out.println("from id: "+id);
 			img.setImageResource(id);
+			img.setClickable(true);
 			img.setOnClickListener(new View.OnClickListener(){
 			    public void onClick(View v) {
 			        Intent imageIntent = new Intent(QuestionsActivity.this,ImageActivity.class);
@@ -253,6 +220,7 @@ public class QuestionsActivity extends Activity {
 		else{
 			ImageView img= (ImageView) findViewById(R.id.imageView1);
 			img.setImageResource(R.drawable.kainat);
+			img.setClickable(false);
 
 			//TouchImageView timg = (TouchImageView) findViewById(R.id.imageView1);
 	        //timg.setMaxZoom(4);

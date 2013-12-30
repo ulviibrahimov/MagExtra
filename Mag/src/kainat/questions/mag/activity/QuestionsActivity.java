@@ -15,6 +15,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.Menu;
@@ -204,7 +206,8 @@ public class QuestionsActivity extends Activity {
 	public void displayQuestion(Question question, Integer index){
 		if(question.getImage()!=null){
 			String imageName="image"+question.getImage();
-			ImageView img= (ImageView) findViewById(R.id.imageView1);
+			ImageView img=null;
+			img=(ImageView) findViewById(R.id.imageView1);
 			final int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
 			System.out.println("from id: "+id);
 			img.setImageResource(id);
@@ -232,6 +235,8 @@ public class QuestionsActivity extends Activity {
 		t.setText("Sual: "+(index+1));
 		t=(TextView)findViewById(R.id.questionText);
 		t.setText(question.getQuestionText());
+		//t.setBackgroundColor(0xE2A76F00);
+		t.setTypeface(Typeface.DEFAULT_BOLD);
 
 	}
 
@@ -249,7 +254,13 @@ public class QuestionsActivity extends Activity {
 				else if (questionIndex==0){
 					questionIndex=questionL.size()-1;
 				}
+				aButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				bButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				cButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				dButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				eButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
 				displayQuestion(questionL.get(questionIndex),questionIndex);
+				
 			}
  
 		});
@@ -270,6 +281,11 @@ public class QuestionsActivity extends Activity {
 				else if (questionIndex==questionL.size()-1){
 					questionIndex=0;
 				}
+				aButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				bButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				cButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				dButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+				eButton.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
 				displayQuestion(questionL.get(questionIndex),questionIndex);
 			}
  
@@ -286,14 +302,10 @@ public class QuestionsActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				if(questionL.get(questionIndex).getCorrectAnswer().equals("a")){
-					Toast toast=Toast.makeText(context, "Cavabınız düzgündür!", 1);
-					toast.getView().setBackgroundColor(Color.GREEN);
-					toast.show();
+					aButton.getBackground().setColorFilter(Color.GREEN,PorterDuff.Mode.MULTIPLY);
 				}
 				else{
-					Toast toast=Toast.makeText(context, "Cavabınız səhvdir!", 1);
-					toast.getView().setBackgroundColor(Color.RED);
-					toast.show();
+					aButton.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
 				}
 			}
  
@@ -309,14 +321,10 @@ public class QuestionsActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				if(questionL.get(questionIndex).getCorrectAnswer().equals("b")){
-					Toast toast=Toast.makeText(context, "Cavabınız düzgündür!", 1);
-					toast.getView().setBackgroundColor(Color.GREEN);
-					toast.show();
+					bButton.getBackground().setColorFilter(Color.GREEN,PorterDuff.Mode.MULTIPLY);
 				}
 				else{
-					Toast toast=Toast.makeText(context, "Cavabınız səhvdir!", 1);
-					toast.getView().setBackgroundColor(Color.RED);
-					toast.show();    
+					bButton.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
 				}
 			}
  
@@ -333,14 +341,10 @@ public class QuestionsActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				if(questionL.get(questionIndex).getCorrectAnswer().equals("c")){
-					Toast toast=Toast.makeText(context, "Cavabınız düzgündür!", 1);
-					toast.getView().setBackgroundColor(Color.GREEN);
-					toast.show();
+					cButton.getBackground().setColorFilter(Color.GREEN,PorterDuff.Mode.MULTIPLY);
 				}
 				else{
-					Toast toast=Toast.makeText(context, "Cavabınız səhvdir!", 1);
-					toast.getView().setBackgroundColor(Color.RED);
-					toast.show();
+					cButton.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
 				}
 			}
  
@@ -357,14 +361,10 @@ public class QuestionsActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				if(questionL.get(questionIndex).getCorrectAnswer().equals("d")){
-					Toast toast=Toast.makeText(context, "Cavabınız düzgündür!", 1);
-					toast.getView().setBackgroundColor(Color.GREEN);
-					toast.show();
+					dButton.getBackground().setColorFilter(Color.GREEN,PorterDuff.Mode.MULTIPLY);
 				}
 				else{
-					Toast toast=Toast.makeText(context, "Cavabınız səhvdir!", 1);
-					toast.getView().setBackgroundColor(Color.RED);
-					toast.show();
+					dButton.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
 				}
 			}
  
@@ -381,14 +381,10 @@ public class QuestionsActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				if(questionL.get(questionIndex).getCorrectAnswer().equals("e")){
-					Toast toast=Toast.makeText(context, "Cavabınız düzgündür!", 1);
-					toast.getView().setBackgroundColor(Color.GREEN);
-					toast.show();
+					eButton.getBackground().setColorFilter(Color.GREEN,PorterDuff.Mode.MULTIPLY);
 				}
 				else{
-					Toast toast=Toast.makeText(context, "Cavabınız səhvdir!", 1);
-					toast.getView().setBackgroundColor(Color.RED);
-					toast.show();
+					eButton.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
 				}
 			}
  

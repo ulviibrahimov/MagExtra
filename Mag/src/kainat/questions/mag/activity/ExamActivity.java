@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -302,7 +303,8 @@ public class ExamActivity extends Activity {
 	public void displayQuestion(Question question, final Integer index){
 		if(question.getImage()!=null){
 			String imageName="image"+question.getImage();
-			ImageView img= (ImageView) findViewById(R.id.imageView1);
+			ImageView img=null;
+			img=(ImageView) findViewById(R.id.imageView1);
 			final int id = getResources().getIdentifier("kainat.questions.mag:drawable/" + imageName, null, null);
 			System.out.println("from id: "+id);
 			img.setImageResource(id);
@@ -327,7 +329,9 @@ public class ExamActivity extends Activity {
 		t.setText("Sual: "+(index+1));
 
 		TextView x=new TextView(this);
-		x=(TextView)findViewById(R.id.textView1);
+		x.setTypeface(Typeface.DEFAULT_BOLD);
+		//x.setBackgroundColor(Color.y);
+		x=(TextView)findViewById(R.id.questionText);
 		x.setText(question.getQuestionText());
 		Button aButton=(Button)findViewById(R.id.abutton);
         aButton.getBackground().setColorFilter(question.getColorA(),PorterDuff.Mode.MULTIPLY);

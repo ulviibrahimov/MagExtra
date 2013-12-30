@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/back" >
 
     <LinearLayout
         android:id="@+id/ll2"
@@ -17,32 +18,34 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/prev" />
+            android:text="@string/prev" 
+            android:background="@drawable/back_buttons"/>
 
     <TextView
         android:id="@+id/questionView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.99"
-        android:gravity="center" />
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/timerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.99"
+        android:gravity="center"/>
 
-    <TextView 
-        	android:id="@+id/timerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
         <Button
             android:id="@+id/nextbutton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/next" />
+            android:text="@string/next"
+            android:background="@drawable/back_buttons" />
 
     </LinearLayout>
     
-         <LinearLayout
+     <LinearLayout
         android:id="@+id/ll1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -55,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="A" />
+            android:text="A" 
+            android:background="@drawable/back_buttons"/>
 
         <Button
             android:id="@+id/bbutton"
@@ -63,7 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="B" />
+            android:text="B" 
+            android:background="@drawable/back_buttons"/>
 
         <Button
             android:id="@+id/cbutton"
@@ -71,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="C" />
+            android:text="C" 
+            android:background="@drawable/back_buttons"/>
 
         <Button
             android:id="@+id/dbutton"
@@ -79,7 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="D" />
+            android:text="D" 
+            android:background="@drawable/back_buttons"/>
 
         <Button
             android:id="@+id/ebutton"
@@ -87,27 +94,31 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="E" />
+            android:text="E" 
+            android:background="@drawable/back_buttons"/>
     </LinearLayout>
 
      <TextView
-         android:id="@+id/textView1"
+         android:id="@+id/questionText"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_above="@+id/ll1"
          android:layout_alignParentLeft="true"
          android:layout_alignParentRight="true"
-         android:text="TextView" />
+         android:text="1st line\n2nd line\n3rd line\n4th line" 
+         android:background="@drawable/back" 
+         android:gravity="center"/>
 
      <ImageView
          android:id="@+id/imageView1"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_above="@+id/textView1"
+         android:layout_above="@+id/questionText"
          android:layout_alignParentLeft="true"
          android:layout_alignParentRight="true"
          android:layout_below="@+id/ll2"
          android:scaleType="fitXY"
+         android:background="@drawable/image_back" 
          android:src="@drawable/kainat" />
 
 </RelativeLayout>
